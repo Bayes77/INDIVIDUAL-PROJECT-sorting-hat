@@ -1,3 +1,75 @@
 body {
-    background-color: black;
+    background-image: url("https://static1.srcdn.com/wordpress/wp-content/uploads/2019/12/great-hall-feature.jpeg");
+    background-size: cover;
+  }
+
+#app {
+    display:flex;
+   flex-wrap:wrap;
+   justify-content: space-evenly;
+   row-gap: 50px;
+}
+
+header {
+    background-color: white;
+    text-align: center;
+}
+
+
+form {
+    display: flex;
+   flex-wrap: wrap;
+   flex-direction: column;
+   align-items: center;
+
+}
+
+.typeBtn {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+    
+}
+
+.card {
+    background-color: burlywood;
+    text-align: center;
+    border: 10px; 
+}
+
+#Gryffindor {
+    background-color: red;
+}
+
+#Slytherin {
+    background-color: green;
+}
+
+#Hufflepuff {
+    background-color: yellow;
+}
+
+#Ravenclaw {
+    background-color: blue;
+}
+
+#allStudents {
+    background-color: darkgoldenrod;
+}
+
+.Griffindor-Footer {
+    background-color: red;
+}
+
+.Slytherin-Footer {
+    background-color: green;
+}
+
+.Hufflepuff-Footer {
+    background-color: yellow;
+}
+
+.Ravenclaw {
+    background-color: blue;
 }
