@@ -57,6 +57,15 @@ const students = [
     }
 ];
 
+const darkArmy = [{
+  id: 1,
+  name:"Gexium",
+  wand:"Black Ichor",
+  house: "Slytherin",
+  imageUrl:"https://static.wikia.nocookie.net/evil-never-dies/images/b/b8/Dark_Wizard_FINAL.jpg/revision/latest?cb=20160920162126",
+}
+
+];
 
 
 
@@ -71,13 +80,13 @@ const renderToDom = (divId, htmlToRender) => {
 
   const cardsOnDom = (array) => {
     let domString = "";
-    for (const student of array) {
+  for (const student of array) {
         const cardFooter= 
             student.house === "Gryffindor" ? "Griffindor-Footer":
             student.house === "Slytherin" ? "Slytherin-Footer":
             student.house === "Hufflepuff" ? "Hufflepuff-Footer":
-            student.house === "Ravenclaw" ? "Ravenclaw":
-            "";
+            student.house === "Ravenclaw" ? "Ravenclaw-Footer":
+            '';
 
   domString += `<div class="card" style="width: 18rem;">
   <div class="card-body">
@@ -88,48 +97,94 @@ const renderToDom = (divId, htmlToRender) => {
   <button class="btn btn-danger mx-auto" id="delete--${student.id}">Expel</button>
   <div class="cardFooter ${cardFooter}"> ${student.house}</div>
   </div>`;
-}
+
+  }
 renderToDom("#app", domString);
 };
 cardsOnDom(students);
 
+
 // Filter Function
 
-// const filter = (array, studenthouse) => {
-//     const studentArray = [];
+const filter = (array, studenthouse) => {
+    const studentArray = [];
 
-//     for (const student of array) {
-//       if (student.house === studenthouse) {
-//         studentArray.push(student);
-//       }
-//     }
-//   // Filter function needs this
-//     return studentArray;
+    for (const student of array) {
+      if (student.house === studenthouse) {
+        studentArray.push(student);
+      }
+    }
+  // Filter function needs this
+    return studentArray;
+  };
+
+  // Targeting buttons on the dom
+  cardsOnDom(students);
+  
+const showGryffindorButton = document.querySelector("#Gryffindor"); 
+const showSlytherinButton = document.querySelector("#Slytherin")
+const showHufflepuffButton = document.querySelector("#Hufflepuff");
+const showRavenclawButton = document.querySelector("#Ravenclaw");
+const showAllStudentsButton = document.querySelector("#AllStudents");
+
+showAllStudentsButton.addEventListener("click", () => {
+  cardsOnDom(students);
+});
+
+showGryffindorButton.addEventListener("click", () => {
+  const gryffindorStudents = filter(students, "Gryffindor");
+  cardsOnDom(gryffindorStudents);
+});
+
+(document.querySelector("#Slytherin")).addEventListener("click", () => {
+  const slytherinStudents = filter(students, "Slytherin");
+  cardsOnDom(slytherinStudents);
+});
+
+showHufflepuffButton.addEventListener("click", () => {
+  const hufflepuffStudents = filter(students, "Hufflepuff");
+  cardsOnDom(hufflepuffStudents);
+});
+
+showRavenclawButton.addEventListener("click", () => {
+  const ravenclawStudents = filter(students, "Ravenclaw");
+  cardsOnDom(ravenclawStudents);
+});
+
+// const form = document.querySelector('form');
+
+// const createStudent= (e) => {
+// //  Allforms need this
+//   e.preventDefault();
+   
+//   const createStudentObj= {
+//     id:students.length + 1,
+//     name:document.querySelector("#name").value,
+//     color:document.querySelector("#color").value,
+//     specialSkill:document.querySelector("#specialSkill").value,
+//     house:document.querySelector("#house").value,
+//     imageUrl:document.querySelector("#imageUrl").value,
+
 //   };
 
-//   // Targeting buttons on the dom
+//   // Add pet function /double check variables when pasting
+
+//   students.push(createStudentObj);
 //   cardsOnDom(students);
-  
-//   const showCatsButton = document.querySelector("#cats"); 
-// const showDogsButton = document.querySelector("#dogs");
-// const showDinosButton = document.querySelector("#dinos");
-// const showAllPetsButton = document.querySelector("#allPets");
+//   form.reset();
+// };
+// form.addEventListener('submit', createStudent);
 
-// showAllPetsButton.addEventListener("click", () => {
-//   cardsOnDom(pets);
-// });
+const app=document.querySelector("#app");
 
-// showCatsButton.addEventListener("click", () => {
-//   const catsPets = filter(pets, "cat");
-//   cardsOnDom(catsPets);
-// });
+app.addEventListener('click', (e) => {
+  if (e.target.id.includes("expel")) {
+    const [, id] = e.target.id.split("--");
+    const index= students.findIndex((e) => e.id===Number(id));
 
-// showDogsButton.addEventListener("click", () => {
-//   const dogsPets = filter(pets, "dog");
-//   cardsOnDom(dogsPets);
-// });
+    darkArmy.splice(index, 1);
+    cardsOnDom(students);
+    cardsOnDom(darkArmy);
 
-// showDinosButton.addEventListener("click", () => {
-//   const dinoPets = filter(pets, "dino");
-//   cardsOnDom(dinoPets);
-// });
+  }
+});
