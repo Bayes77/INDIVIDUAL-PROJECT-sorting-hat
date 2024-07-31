@@ -2,70 +2,69 @@ const students = [
     {
       id: 1,
       name: "Eneya",
-      color: "Green",
-      specialSkill: "Gives sincere apologies.",
+      
+      
       house: "Hufflepuff",
       imageUrl: "https://cdn11.bigcommerce.com/s-20ff4/images/stencil/1280x1280/products/958/4199/Wizard_at_Night_Poster__94732.1432199659.jpg?c=2",
     },
     {
         id: 2,
       name: "Heinesin",
-      color: "Brown",
-      specialSkill: "Just picks the tomatoes off of a sandwich instead of requesting a whole new sandwich.",
+      
+      
       house: "Ravenclaw",
       imageUrl: "https://i0.wp.com/dungeonsanddragonsfan.com/wp-content/uploads/2024/07/new-2024-wizard-dnd-5e-class-changes-4.png?fit=800%2C450&ssl=1",
     },
     {
       id: 3,
       name: "Bargery",
-      color: "Yellow",
-      specialSkill: "Can prove he is a real man by drinking whiskey.",
+      
+      
       house: "Slytherin",
       imageUrl: "https://i.redd.it/oddado3mfhd61.jpg"
     },
     {
       id: 4,
       name: "Morabulie",
-      color: "Black",
-      specialSkill: "Burps minimally.",
+      
+      
       house: "Ravenclaw",
       imageUrl: "https://www.enworld.org/attachments/geas-5e-dd-png.353192/"
     },
     {
       id: 5,
       name: "Admus",
-      color: "Brown",
-      specialSkill: "Comfortable in the outdoors for up to eight hours.",
+     
+      
       house: "Gryffindor",
       imageUrl: "https://sites.nd.edu/manuscript-studies/files/2020/12/gandalf-icon-860x1024.jpg"
     },
     {
       id: 6,
       name: "Atebe",
-      color: "Black",
-      specialSkill: "Can read (but cannot understand) Hebrew.",
+      
       house: "Gryffindor",
       imageUrl: "https://assetsio.gnwcdn.com/0-dungeons-and-dragons-wizard-5e-guide.png?width=1200&height=1200&fit=crop&quality=100&format=png&enable=upscale&auto=webp"
     },
     {
       id: 7,
       name: "Framsey",
-      house: "Yellow",
-      specialSkill: "Able to stop chewing ice or whistling on request.",
+      
       house:"Slytherin",
       imageUrl:"https://www.muddycolors.com/wp-content/uploads/2021/07/Mordenkainen-donato-2500.jpg"
     }
 ];
 
-const darkArmy = [{
-  id: 1,
-  name:"Gexium",
-  wand:"Black Ichor",
-  house: "Slytherin",
-  imageUrl:"https://static.wikia.nocookie.net/evil-never-dies/images/b/b8/Dark_Wizard_FINAL.jpg/revision/latest?cb=20160920162126",
-}
+// const darkArmy = [
+//   {
+//   id: 1,
+//   name:"Gexium",
+//   wand:"Black Ichor",
+//   house: "Slytherin",
+//   imageUrl:"https://static.wikia.nocookie.net/evil-never-dies/images/b/b8/Dark_Wizard_FINAL.jpg/revision/latest?cb=20160920162126",
+// }
 
-];
+// ];
 
 
 
@@ -92,7 +91,7 @@ const renderToDom = (divId, htmlToRender) => {
   <div class="card-body">
   <p class="card-text">${student.name}</p>
   <img src="${student.imageUrl}" class="img-thumbnail" alt="...">
-  <p class="specialSkill">${student.specialSkill} </p>
+ 
   </div>
   <button class="btn btn-danger mx-auto" id="delete--${student.id}">Expel</button>
   <div class="cardFooter ${cardFooter}"> ${student.house}</div>
@@ -151,40 +150,66 @@ showRavenclawButton.addEventListener("click", () => {
   cardsOnDom(ravenclawStudents);
 });
 
-// const form = document.querySelector('form');
 
-// const createStudent= (e) => {
-// //  Allforms need this
-//   e.preventDefault();
+
+
+
+
+
+const form =document.querySelector('form');
+
+const createStudent= (e) => {
+
+//   const houses=["Gryffindor","Slytherin","Hufflepuff","Ravenclaw"];
+// const random=Math.floor(Math.random()*randomHouse.length);
+// const randomHouse=houses[random];
+//  Allforms need this
+  e.preventDefault();
    
-//   const createStudentObj= {
-//     id:students.length + 1,
-//     name:document.querySelector("#name").value,
-//     color:document.querySelector("#color").value,
-//     specialSkill:document.querySelector("#specialSkill").value,
-//     house:document.querySelector("#house").value,
-//     imageUrl:document.querySelector("#imageUrl").value,
+  const createStudentObj= {
+    id:students.length + 1,
+    name:document.querySelector("#name").value,
+    
+    
+    house:randomHouse(),
+    imageUrl:document.querySelector("#imageUrl").value,
 
-//   };
+  };
 
-//   // Add pet function /double check variables when pasting
+  // Add pet function /double check variables when pasting
 
-//   students.push(createStudentObj);
-//   cardsOnDom(students);
-//   form.reset();
-// };
-// form.addEventListener('submit', createStudent);
+  students.push(createStudentObj);
+  cardsOnDom(students);
+  form.reset();
+};
+form.addEventListener('submit', createStudent);
 
-const app=document.querySelector("#app");
+const randomHouse= (students) => {
+const houses=["Gryffindor","Slytherin","Hufflepuff","Ravenclaw"];
+const random=Math.floor(Math.random()* randomHouse.length);
+const randomHouse=houses[random];
+return randomHouse;
+}
 
-app.addEventListener('click', (e) => {
-  if (e.target.id.includes("expel")) {
-    const [, id] = e.target.id.split("--");
-    const index= students.findIndex((e) => e.id===Number(id));
+// let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+// width=600,height=300,left=100,top=100`;
 
-    darkArmy.splice(index, 1);
-    cardsOnDom(students);
-    cardsOnDom(darkArmy);
+// open('/', 'test', params);
 
-  }
-});
+
+
+
+
+// const app=document.querySelector("#app");
+
+// app.addEventListener('click', (e) => {
+//   if (e.target.id.includes("expel")) {
+//     const [, id] = e.target.id.split("--");
+//     const index= students.findIndex((e) => e.id===Number(id));
+
+//     darkArmy.splice(index, 1);
+//     cardsOnDom(students);
+//     cardsOnDom(darkArmy);
+
+//   }
+// });
