@@ -1,10 +1,15 @@
+const HogwartsHouse = {
+  GRYFFINDOR: "#FF0000",  // Red
+  HUFFLEPUFF: "#FFFF00",  // Yellow
+  RAVENCLAW: "#0000FF",   // Blue
+  SLYTHERIN: "#008000",   // Green
+}
 const students = [
     {
       id: 1,
       name: "Eneya",
-      
-      
       house: "Hufflepuff",
+    
       imageUrl: "https://cdn11.bigcommerce.com/s-20ff4/images/stencil/1280x1280/products/958/4199/Wizard_at_Night_Poster__94732.1432199659.jpg?c=2",
     },
     {
@@ -55,16 +60,15 @@ const students = [
     }
 ];
 
-// const darkArmy = [
-//   {
-//   id: 1,
-//   name:"Gexium",
-//   wand:"Black Ichor",
-//   house: "Slytherin",
-//   imageUrl:"https://static.wikia.nocookie.net/evil-never-dies/images/b/b8/Dark_Wizard_FINAL.jpg/revision/latest?cb=20160920162126",
-// }
+const darkArmy = [
+  {
+  id: 1,
+  name:"Gexium",
+  house:"slytherin",
+  imageUrl:"https://static.wikia.nocookie.net/evil-never-dies/images/b/b8/Dark_Wizard_FINAL.jpg/revision/latest?cb=20160920162126",
+}
 
-// ];
+];
 
 
 
@@ -77,30 +81,41 @@ const renderToDom = (divId, htmlToRender) => {
     selectedDiv.innerHTML = htmlToRender;
   };
 
-  const cardsOnDom = (array) => {
+  const cardsOnDom = (array,expelled) => {
     let domString = "";
-  for (const student of array) {
-        const cardFooter= 
-            student.house === "Gryffindor" ? "Griffindor-Footer":
-            student.house === "Slytherin" ? "Slytherin-Footer":
-            student.house === "Hufflepuff" ? "Hufflepuff-Footer":
-            student.house === "Ravenclaw" ? "Ravenclaw-Footer":
-            '';
+    array.map((student)=>{
+   const cardFooter= 
+       student.house === "Gryffindor" ? "Griffindor-Footer":
+       student.house === "Slytherin" ? "Slytherin-Footer":
+       student.house === "Hufflepuff" ? "Hufflepuff-Footer":
+       student.house === "Ravenclaw" ? "Ravenclaw-Footer":
+       '';
 
-  domString += `<div class="card" style="width: 18rem;">
-  <div class="card-body">
-  <p class="card-text">${student.name}</p>
-  <img src="${student.imageUrl}" class="img-thumbnail" alt="...">
- 
-  </div>
-  <button class="btn btn-danger mx-auto" id="delete--${student.id}">Expel</button>
-  <div class="cardFooter ${cardFooter}"> ${student.house}</div>
-  </div>`;
+domString += `<div class="card" style="width:6rem;background:${HogwartsHouse[student.house.toUpperCase()]};">
+<div class="card-body">
+<p class="card-text">${student.name}</p>
+<img src="${student.imageUrl}" class="img-thumbnail" alt="...">
 
-  }
-renderToDom("#app", domString);
+</div>
+<button class="btn btn-secondary mx-auto" id="delete--${student.id}">Expel</button>
+<div class="cardFooter ${cardFooter}"> ${student.house}</div>
+</div>`;
+
+
+
+
+})
+if (expelled){
+  renderToDom("#app2", domString);
+
+} else{
+
+  renderToDom("#app", domString);
+}
+
 };
 cardsOnDom(students);
+cardsOnDom(darkArmy, true);
 
 
 // Filter Function
@@ -151,7 +166,13 @@ showRavenclawButton.addEventListener("click", () => {
 });
 
 
+const houseRandom= (students) => {
+  const houses=["Gryffindor","Slytherin","Hufflepuff","Ravenclaw"];
+  const random=Math.floor(Math.random()* (houses.length -1));
+  console.log(random)
 
+  return  houses[random];
+}
 
 
 
@@ -160,19 +181,14 @@ const form =document.querySelector('form');
 
 const createStudent= (e) => {
 
-//   const houses=["Gryffindor","Slytherin","Hufflepuff","Ravenclaw"];
-// const random=Math.floor(Math.random()*randomHouse.length);
-// const randomHouse=houses[random];
-//  Allforms need this
+
   e.preventDefault();
    
   const createStudentObj= {
     id:students.length + 1,
     name:document.querySelector("#name").value,
-    
-    
-    house:randomHouse(),
-    imageUrl:document.querySelector("#imageUrl").value,
+    house:houseRandom(),
+    imageUrl:document.getElementById("imageUrl").value,
 
   };
 
@@ -180,36 +196,31 @@ const createStudent= (e) => {
 
   students.push(createStudentObj);
   cardsOnDom(students);
+  console.log(students)
   form.reset();
 };
 form.addEventListener('submit', createStudent);
 
-const randomHouse= (students) => {
-const houses=["Gryffindor","Slytherin","Hufflepuff","Ravenclaw"];
-const random=Math.floor(Math.random()* randomHouse.length);
-const randomHouse=houses[random];
-return randomHouse;
-}
-
-// let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-// width=600,height=300,left=100,top=100`;
-
-// open('/', 'test', params);
 
 
 
 
 
-// const app=document.querySelector("#app");
 
-// app.addEventListener('click', (e) => {
-//   if (e.target.id.includes("expel")) {
-//     const [, id] = e.target.id.split("--");
-//     const index= students.findIndex((e) => e.id===Number(id));
 
-//     darkArmy.splice(index, 1);
-//     cardsOnDom(students);
-//     cardsOnDom(darkArmy);
 
-//   }
-// });
+const app=document.querySelector("#app");
+
+app.addEventListener('click', (e) => {
+  if (e.target.id.includes("delete")) {
+    const [, id] = e.target.id.split("--");
+    const index= students.findIndex((e) => e.id=== +id); 
+
+
+    darkArmy.push(students[index]);
+    students.splice(index,1)
+    cardsOnDom(students);
+    cardsOnDom(darkArmy,true);
+
+  }
+});
