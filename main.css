@@ -3,12 +3,15 @@ body {
     background-size: cover;
   }
 
-#app {
+#app,#app2 {
     display:flex;
    flex-wrap:wrap;
    justify-content: space-evenly;
    row-gap: 50px;
+   
 }
+
+
 
 header {
     background-color: white;
@@ -29,34 +32,67 @@ form {
     justify-content: space-evenly;
     align-items: center;
     padding: 50px;
+    color: light gray;
+    
+}
+.btnHouse{
+    font-weight: 600;
+}
+
+.typeBtn>button:hover{
+    filter:brightness(80%)
     
 }
 
 .card {
-    background-color: burlywood;
+   padding: 1rem;
     text-align: center;
     border: 10px; 
+    min-width: 150px;
 }
 
+.card> button{
+   
+    width: 100%;
+}
+.card-body{
+    padding:0;
+    margin-bottom: 10px;
+}
 #Gryffindor {
     background-color: red;
+    border-radius: 5px;
+    color: light gray;
 }
 
 #Slytherin {
     background-color: green;
+    border-radius: 5px;
+    color: light gray;
 }
+
+
 
 #Hufflepuff {
     background-color: yellow;
+    border-radius: 5px;
+    color: light gray;
 }
+
 
 #Ravenclaw {
     background-color: blue;
+    border-radius: 5px;
+    color: light gray;
 }
+
 
 #AllStudents {
     background-color: darkgoldenrod;
+    border-radius: 5px;
+    color: light gray;
 }
+
 
 .Griffindor-Footer {
     background-color: red;
@@ -74,3 +110,50 @@ form {
 .Ravenclaw-Footer {
     background-color: blue;
 }
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    height: 100%;
+    margin-bottom: 100px;
+ 
+   
+}
+
+.container >div{
+    min-height:100%;
+    border: 3px solid white;
+    border-radius: 5px;
+    padding: 1rem;
+
+
+
+}
+
+
+.img-thumbnail {
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+}
+
+h2 {
+    color: white;
+    text-align: center;
+}
+
+
+.form-floating>.btn {
+    width: 100%;
+    background-color: brown;
+    border-color: white;
+    
+
+}
+.form-floating>.btn:hover{
+    border-color: white;
+    background-color: brown;
+    filter:brightness(80%)
+}
+
