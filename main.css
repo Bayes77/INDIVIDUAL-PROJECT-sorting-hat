@@ -23,6 +23,8 @@ h2 {
     text-align: center;
 }
 
+
+
 /* Targeting the app ID */
 
 #app,#app2 {
@@ -90,11 +92,11 @@ h2 {
 
 /* targeting the size of the button by targeting a specific class in the div */
 
-.form-floating>.btn {
+ .form-floating>.btn {
     width: 100%;
     background-color: brown;
     border-color: white;
-}
+} 
 
 /* creates the hover effect by using psudoclass (hover) and by adjusting the brightness */
 
@@ -169,7 +171,4 @@ h2 {
     border: 3px solid white;
     border-radius: 5px;
     padding: 1rem;
-
-
-
 }
