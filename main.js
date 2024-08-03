@@ -1,87 +1,81 @@
+// object that i pull the house colors from for the card background
+
 const HogwartsHouse = {
   GRYFFINDOR: "#FF0000",  // Red
   HUFFLEPUFF: "#FFFF00",  // Yellow
   RAVENCLAW: "#0000FF",   // Blue
   SLYTHERIN: "#008000",   // Green
 }
+// my first array that i pull from for the project
+
 const students = [
     {
       id: 1,
       name: "Eneya",
       house: "Hufflepuff",
-    
       imageUrl: "https://cdn11.bigcommerce.com/s-20ff4/images/stencil/1280x1280/products/958/4199/Wizard_at_Night_Poster__94732.1432199659.jpg?c=2",
     },
     {
         id: 2,
       name: "Heinesin",
-      
-      
       house: "Ravenclaw",
       imageUrl: "https://i0.wp.com/dungeonsanddragonsfan.com/wp-content/uploads/2024/07/new-2024-wizard-dnd-5e-class-changes-4.png?fit=800%2C450&ssl=1",
     },
     {
       id: 3,
       name: "Bargery",
-      
-      
       house: "Slytherin",
       imageUrl: "https://i.redd.it/oddado3mfhd61.jpg"
     },
     {
       id: 4,
       name: "Morabulie",
-      
-      
       house: "Ravenclaw",
       imageUrl: "https://www.enworld.org/attachments/geas-5e-dd-png.353192/"
     },
     {
       id: 5,
       name: "Admus",
-     
-      
       house: "Gryffindor",
       imageUrl: "https://sites.nd.edu/manuscript-studies/files/2020/12/gandalf-icon-860x1024.jpg"
     },
     {
       id: 6,
       name: "Atebe",
-      
       house: "Gryffindor",
       imageUrl: "https://assetsio.gnwcdn.com/0-dungeons-and-dragons-wizard-5e-guide.png?width=1200&height=1200&fit=crop&quality=100&format=png&enable=upscale&auto=webp"
     },
     {
       id: 7,
       name: "Framsey",
-      
       house:"Slytherin",
       imageUrl:"https://www.muddycolors.com/wp-content/uploads/2021/07/Mordenkainen-donato-2500.jpg"
     }
 ];
+
+// the second array i pull from for the project
 
 const darkArmy = [
   {
   id: 1,
   name:"Gexium",
   house:"slytherin",
-  imageUrl:"https://static.wikia.nocookie.net/evil-never-dies/images/b/b8/Dark_Wizard_FINAL.jpg/revision/latest?cb=20160920162126",
+  imageUrl:"https://static.wikia.nocookie.net/villains/images/9/9d/Sarumanthewhiteposter.jpg/revision/latest?cb=20230808223334",
 }
 
 ];
 
 
+// My rendertodom utility function 
 
-
-
-
-
-const renderToDom = (divId, htmlToRender) => {
+const renderToDom = (divId, htmlToRender) => {  
     const selectedDiv = document.querySelector(divId);
     selectedDiv.innerHTML = htmlToRender;
   };
 
-  const cardsOnDom = (array,expelled) => {
+  // This is my domstring
+
+  const cardsOnDom = (array,expelled) => {  
     let domString = "";
     array.map((student)=>{
    const cardFooter= 
@@ -91,18 +85,19 @@ const renderToDom = (divId, htmlToRender) => {
        student.house === "Ravenclaw" ? "Ravenclaw-Footer":
        '';
 
-domString += `<div class="card" style="width:6rem;background:${HogwartsHouse[student.house.toUpperCase()]};">
-<div class="card-body">
+// calling HogwartsHouse object to display house color backgroung color
+
+domString += `<div class="card" style="width:6rem;background:${HogwartsHouse[student.house.toUpperCase()]};"> 
+<div class="card-body"> 
 <p class="card-text">${student.name}</p>
 <img src="${student.imageUrl}" class="img-thumbnail" alt="...">
-
 </div>
 <button class="btn btn-secondary mx-auto" id="delete--${student.id}">Expel</button>
 <div class="cardFooter ${cardFooter}"> ${student.house}</div>
 </div>`;
 
 
-
+// if statement to display both arrays on the page
 
 })
 if (expelled){
@@ -122,17 +117,16 @@ cardsOnDom(darkArmy, true);
 
 const filter = (array, studenthouse) => {
     const studentArray = [];
-
     for (const student of array) {
       if (student.house === studenthouse) {
         studentArray.push(student);
       }
     }
-  // Filter function needs this
     return studentArray;
   };
 
   // Targeting buttons on the dom
+ 
   cardsOnDom(students);
   
 const showGryffindorButton = document.querySelector("#Gryffindor"); 
@@ -165,6 +159,7 @@ showRavenclawButton.addEventListener("click", () => {
   cardsOnDom(ravenclawStudents);
 });
 
+// function to randomize the assigning of house upon creation of new student
 
 const houseRandom= (students) => {
   const houses=["Gryffindor","Slytherin","Hufflepuff","Ravenclaw"];
@@ -175,15 +170,18 @@ const houseRandom= (students) => {
 }
 
 
-
+// my form
 
 const form =document.querySelector('form');
 
 const createStudent= (e) => {
 
+// all forms must have this
 
   e.preventDefault();
-   
+ 
+  // the object that my form pulls from/ also where the randomizing function is called
+
   const createStudentObj= {
     id:students.length + 1,
     name:document.querySelector("#name").value,
@@ -192,7 +190,7 @@ const createStudent= (e) => {
 
   };
 
-  // Add pet function /double check variables when pasting
+  // Add student function 
 
   students.push(createStudentObj);
   cardsOnDom(students);
@@ -201,12 +199,7 @@ const createStudent= (e) => {
 };
 form.addEventListener('submit', createStudent);
 
-
-
-
-
-
-
+// my delete student statement
 
 
 const app=document.querySelector("#app");
@@ -215,7 +208,6 @@ app.addEventListener('click', (e) => {
   if (e.target.id.includes("delete")) {
     const [, id] = e.target.id.split("--");
     const index= students.findIndex((e) => e.id=== +id); 
-
 
     darkArmy.push(students[index]);
     students.splice(index,1)
