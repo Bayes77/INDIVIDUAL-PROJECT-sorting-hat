@@ -1,23 +1,14 @@
+/* Id targets */
+
 body {
     background-image: url("https://static1.srcdn.com/wordpress/wp-content/uploads/2019/12/great-hall-feature.jpeg");
     background-size: cover;
   }
 
-#app,#app2 {
-    display:flex;
-   flex-wrap:wrap;
-   justify-content: space-evenly;
-   row-gap: 50px;
-   
-}
-
-
-
 header {
-    background-color: white;
+    background-color: rgb(176, 33, 33);
     text-align: center;
 }
-
 
 form {
     display: flex;
@@ -27,6 +18,24 @@ form {
 
 }
 
+h2 {
+    color: white;
+    text-align: center;
+}
+
+/* Targeting the app ID */
+
+#app,#app2 {
+    display:flex;
+   flex-wrap:wrap;
+   justify-content: space-evenly;
+   row-gap: 50px;
+   
+}
+
+/* targeting of buttons */
+
+
 .typeBtn {
     display: flex;
     justify-content: space-evenly;
@@ -35,6 +44,7 @@ form {
     color: light gray;
     
 }
+
 .btnHouse{
     font-weight: 600;
 }
@@ -44,21 +54,6 @@ form {
     
 }
 
-.card {
-   padding: 1rem;
-    text-align: center;
-    border: 10px; 
-    min-width: 150px;
-}
-
-.card> button{
-   
-    width: 100%;
-}
-.card-body{
-    padding:0;
-    margin-bottom: 10px;
-}
 #Gryffindor {
     background-color: red;
     border-radius: 5px;
@@ -93,6 +88,50 @@ form {
     color: light gray;
 }
 
+/* targeting the size of the button by targeting a specific class in the div */
+
+.form-floating>.btn {
+    width: 100%;
+    background-color: brown;
+    border-color: white;
+}
+
+/* creates the hover effect by using psudoclass (hover) and by adjusting the brightness */
+
+.form-floating>.btn:hover{
+    border-color: white;
+    background-color: brown;
+    filter:brightness(80%)
+}
+
+/* targeting of the card class */
+
+.card {
+   padding: 1rem;
+    text-align: center;
+    border: 10px; 
+    min-width: 150px;
+}
+
+/* targeting a specific class in a div */
+
+.card> button{
+   
+    width: 100%;
+}
+
+.card-body{
+    padding:0;
+    margin-bottom: 10px;
+}
+
+.img-thumbnail {
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+}
+
+
 
 .Griffindor-Footer {
     background-color: red;
@@ -110,6 +149,8 @@ form {
 .Ravenclaw-Footer {
     background-color: blue;
 }
+
+/* Targeting the container class */
 
 .container {
     display: grid;
@@ -130,30 +171,3 @@ form {
 
 
 }
-
-
-.img-thumbnail {
-    height: 120px;
-    width: 120px;
-    object-fit: cover;
-}
-
-h2 {
-    color: white;
-    text-align: center;
-}
-
-
-.form-floating>.btn {
-    width: 100%;
-    background-color: brown;
-    border-color: white;
-    
-
-}
-.form-floating>.btn:hover{
-    border-color: white;
-    background-color: brown;
-    filter:brightness(80%)
-}
-
