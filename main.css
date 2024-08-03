@@ -118,18 +118,18 @@ h2 {
 .card> button{
    
     width: 100%;
-}
+} 
 
 .card-body{
     padding:0;
     margin-bottom: 10px;
-}
+} 
 
-.img-thumbnail {
+ .img-thumbnail {
     height: 120px;
     width: 120px;
     object-fit: cover;
-}
+} 
 
 
 
@@ -149,6 +149,8 @@ h2 {
 .Ravenclaw-Footer {
     background-color: blue;
 }
+
+
 
 /* Targeting the container class */
 

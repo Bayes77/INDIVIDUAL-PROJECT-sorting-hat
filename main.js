@@ -1,11 +1,4 @@
-// object that i pull the house colors from for the card background
 
-const HogwartsHouse = {
-  GRYFFINDOR: "#FF0000",  // Red
-  HUFFLEPUFF: "#FFFF00",  // Yellow
-  RAVENCLAW: "#0000FF",   // Blue
-  SLYTHERIN: "#008000",   // Green
-}
 // my first array that i pull from for the project
 
 const students = [
@@ -85,15 +78,15 @@ const renderToDom = (divId, htmlToRender) => {
        student.house === "Ravenclaw" ? "Ravenclaw-Footer":
        '';
 
-// calling HogwartsHouse object to display house color backgroung color
 
-domString += `<div class="card" style="width:6rem;background:${HogwartsHouse[student.house.toUpperCase()]};"> 
-<div class="card-body"> 
+
+domString += `<div class="card" style="width:18rem;">
+<div class="card-body">
 <p class="card-text">${student.name}</p>
 <img src="${student.imageUrl}" class="img-thumbnail" alt="...">
 </div>
 <button class="btn btn-secondary mx-auto" id="delete--${student.id}">Expel</button>
-<div class="cardFooter ${cardFooter}"> ${student.house}</div>
+ <div class="cardFooter ${cardFooter}"> ${student.house}</div>
 </div>`;
 
 
